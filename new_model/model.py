@@ -19,7 +19,7 @@ def get_model(n_frames, n_mels, n_conditions, lr):
     h = Concatenate()([h, h, h])
     
     # The final model#######################################################################
-    h = base_model(input_layer)
+    h = base_model(h)
     model = Model(x, h)
     model.compile(optimizer=tf.keras.optimizers.Adam(lr=lr), 
               loss='categorical_crossentropy', 
