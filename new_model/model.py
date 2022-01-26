@@ -7,7 +7,7 @@ from keras.models import Model
     
 def get_model(n_frames, n_mels, n_conditions, lr):
     # InceptionV3 is chosen for the base model##############################################
-    base_model =  tf.keras.applications.mobilenet_v3(include_top=False,
+    base_model =  tf.keras.applications.MobileNetV3Large(include_top=False,
                                                    input_shape=(n_frames, n_mels, 3),
                                                    weights=None,
                                                    classes=n_conditions)
