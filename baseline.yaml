@@ -1,7 +1,7 @@
 dev_directory: ../dev_data
 eval_directory: ../eval_data
-model_directory: ./model
-result_directory: ./result
+model_directory: /content/drive/Shareddrives/newpro112233/challenge/case1
+result_directory: /content/drive/Shareddrives/newpro112233/challenge/case1
 result_file: result.csv
 
 max_fpr: 0.1
