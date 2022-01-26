@@ -13,7 +13,7 @@ import tensorflow as tf
 ########################################################################
 # keras model
 ########################################################################
-def get_model(n_frames, n_mels, n_conditions, lr):
+def get_model(n_frames, n_mels, n_conditions, lr, loss_):
     """
     define the keras model
     the model based on MobileNetV2
@@ -31,9 +31,9 @@ def get_model(n_frames, n_mels, n_conditions, lr):
 
     model = Model(x, h)
 
-    model.compile(optimizer=tf.keras.optimizers.Adam(lr=lr), 
-                  loss='categorical_crossentropy', 
-                  metrics=['accuracy'])
+    model.compile(optimizer = tf.keras.optimizers.Adam(lr=lr), 
+                  loss      = loss_,    # 'categorical_crossentropy'
+                  metrics   = ['accuracy'])
 
     return model
 
