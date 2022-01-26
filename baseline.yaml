@@ -3,7 +3,7 @@ eval_directory: ./eval_data
 model_directory: /content/drive/Shareddrives/newpro112233/challenge/case2
 result_directory: /content/drive/Shareddrives/newpro112233/challenge/case2
 result_file: result.csv
-loss: batch_adaptive
+loss: triplets_loss
 
 max_fpr: 0.1
 decision_threshold: 0.9
