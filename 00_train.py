@@ -12,6 +12,8 @@ import gc
 ########################################################################
 import numpy as np
 import scipy.stats
+import timeit
+import tensorflow as tf
 # from import
 from tqdm import tqdm
 try:
@@ -22,7 +24,7 @@ except:
 import common as com
 # from new_model import model as keras_model
 import keras_model
-from new_model.triplet_loss import batch_all_triplet_loss, batch_hard_triplet_loss, adapted_triplet_loss
+from new_model.triplet_loss import triplets_loss
 ########################################################################
 
 
@@ -125,16 +127,10 @@ def file_list_to_data(file_list,
 ########################################################################
 
 if __name__ == "__main__":
-    import timeit
-
-    if "{}".format(param["loss"])    == "batch_all":
-        loss = batch_all_triplet_loss
+    tf.compat.v1.disable_eager_execution()
         
-    elif "{}".format(param["loss"])  == "batch_hard":
-        loss = batch_hard_triplet_loss
-        
-    elif "{}".format(param["loss"])  == "batch_adaptive":
-        loss = adapted_triplet_loss
+    if "{}".format(param["loss"])  == "triplets_loss":
+        loss = triplets_loss
         
     start = timeit.default_timer()
     # check mode
@@ -277,3 +273,4 @@ if __name__ == "__main__":
         del model
         keras_model.clear_session()
         gc.collect()
+        
