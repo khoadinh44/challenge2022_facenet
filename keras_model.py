@@ -7,6 +7,7 @@ from keras import backend as K
 from keras.layers import Input, Concatenate
 from keras.applications.mobilenet_v2 import MobileNetV2
 from keras.models import Model
+import tensorflow as tf
 
 
 ########################################################################
@@ -30,7 +31,7 @@ def get_model(n_frames, n_mels, n_conditions, lr):
 
     model = Model(x, h)
 
-    model.compile(optimizer=keras.optimizers.Adam(lr=lr), 
+    model.compile(optimizer=tf.keras.optimizers.Adam(lr=lr), 
                   loss='categorical_crossentropy', 
                   metrics=['accuracy'])
 
