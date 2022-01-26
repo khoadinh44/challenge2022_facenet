@@ -1,5 +1,5 @@
-dev_directory: ../dev_data/train
-eval_directory: ../eval_data/target_test
+dev_directory: ../dev_data
+eval_directory: ../eval_data
 model_directory: ./model
 result_directory: ./result
 result_file: result.csv
