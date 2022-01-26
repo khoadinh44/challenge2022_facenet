@@ -25,7 +25,7 @@ def get_model(n_frames, n_mels, n_conditions, lr):
               loss='categorical_crossentropy', 
               metrics=['accuracy'])
 
-return model
+    return model
 
 #########################################################################
 
