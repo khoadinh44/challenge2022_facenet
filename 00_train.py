@@ -20,7 +20,9 @@ except:
     import joblib
 # original lib
 import common as com
-from new_model import model as keras_model
+# from new_model import model as keras_model
+import keras_model
+from new_model.triplet_loss import batch_all_triplet_loss, batch_hard_triplet_loss, adapted_triplet_loss
 ########################################################################
 
 
@@ -122,12 +124,18 @@ def file_list_to_data(file_list,
 
 ########################################################################
 
-
-########################################################################
-# main 00_train.py
-########################################################################
 if __name__ == "__main__":
     import timeit
+
+    if "{}".format(param["loss"])    == "batch_all":
+        loss = batch_all_triplet_loss
+        
+    elif "{}".format(param["loss"])  == "batch_hard":
+        loss = batch_hard_triplet_loss
+        
+    elif "{}".format(param["loss"])  == "batch_adaptive":
+        loss = adapted_triplet_loss
+        
     start = timeit.default_timer()
     # check mode
     # "development": mode == True
@@ -227,17 +235,18 @@ if __name__ == "__main__":
         model = keras_model.get_model(param["feature"]["n_frames"], 
                                       param["feature"]["n_mels"],
                                       n_sections,
-                                      param["fit"]["lr"])
+                                      param["fit"]["lr"],
+                                      loss)
 
         model.summary()
 
-        history = model.fit(x=data,
-                            y=condition,
-                            epochs=param["fit"]["epochs"],
-                            batch_size=param["fit"]["batch_size"],
-                            shuffle=param["fit"]["shuffle"],
-                            validation_split=param["fit"]["validation_split"],
-                            verbose=param["fit"]["verbose"])
+        history = model.fit(x = data,
+                            y = condition,
+                            epochs     = param["fit"]["epochs"],
+                            batch_size = param["fit"]["batch_size"],
+                            shuffle    = param["fit"]["shuffle"],
+                            validation_split = param["fit"]["validation_split"],
+                            verbose          = param["fit"]["verbose"])
 
         # calculate y_pred for fitting anomaly score distribution
         y_pred = []
@@ -268,4 +277,3 @@ if __name__ == "__main__":
         del model
         keras_model.clear_session()
         gc.collect()
-        
