@@ -20,7 +20,7 @@ except:
     import joblib
 # original lib
 import common as com
-import keras_model
+from new_model import model as keras_model
 ########################################################################
 
 
